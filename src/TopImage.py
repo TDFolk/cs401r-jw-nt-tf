@@ -1,5 +1,5 @@
 import sys
-import src.ImagePrep as imgp
+import ImagePrep as imgp
 
 def CropTopImage(src, dest):
 
