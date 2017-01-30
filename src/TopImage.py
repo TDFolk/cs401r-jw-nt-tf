@@ -1,19 +1,22 @@
 import sys
 import ImagePrep as imgp
+import Crop
+import cv2
 
-def CropTopImage(src, dest):
+def CropTopImage(src):
 
     # prepare image
-    imgout = imgp.prep(src, dest)
+    original = cv2.imread(src,-1)
+    imgout = imgp.prep(original)
 
     #crop
+    #imgout = Crop.crop(imgout, original)
 
     # save
-    imgout.save(dest)
+    cv2.imwrite("result.jpg", imgout)
 
 # TODO: validate command line arguements
 img = sys.argv[1]
-imgdest = sys.argv[2]
 
 # Crop
-CropTopImage(img, imgdest)
+CropTopImage(img)

@@ -1,25 +1,26 @@
 from PIL import Image
 from PIL import ImageFilter
 from PIL import ImageOps
-#import cv2
+import cv2
 
-MEDIAN_FILTER_SIZE = 3
-
-def prep(src, dest):
-
-    # open image
-    img = Image.open(src)
+def prep(img):
 
     # Reduce Image Size or create image pyramid
-
+    #img = cv2.resize(img, None, fx=1/10, fy=1/10, interpolation = cv2.INTER_AREA)
 
     # Histogram Stretch Image
-    img = ImageOps.autocontrast(img)
+    histStretch = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+    img = histStretch.apply(img)
 
     # Median Filter (get rid of text, background noise).
-    img = img.filter(ImageFilter.MedianFilter(MEDIAN_FILTER_SIZE))
+    img = cv2.medianBlur(img, 151)
 
     # Automatically threshold image into foreground, background
+    #img = cv2.Canny(img, 105, 120)
+    __,img = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
 
-    imgout = ImageOps.equalize(img)
+    # Resize image back to original
+    #img = cv2.resize(img, None, fx=10, fy=10, interpolation = cv2.INTER_CUBIC)
+
+    imgout = img
     return imgout
