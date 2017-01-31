@@ -16,7 +16,7 @@ def prep(img):
     img = cv2.medianBlur(img, 51)
 
     # Automatically threshold image into foreground, background
-    img = cv2.Canny(img, 20, 25)
+    img = cv2.Canny(img, 15, 20)
     #__,img = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
 
     # Resize image back to original
