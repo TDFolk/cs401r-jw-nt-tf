@@ -1,6 +1,3 @@
-from PIL import Image
-from PIL import ImageFilter
-from PIL import ImageOps
 import cv2
 
 def prep(img):
@@ -13,10 +10,10 @@ def prep(img):
     img = histStretch.apply(img)
 
     # Median Filter (get rid of text, background noise).
-    img = cv2.medianBlur(img, 51)
+    img = cv2.medianBlur(img, 17)
 
     # Automatically threshold image into foreground, background
-    img = cv2.Canny(img, 15, 20)
+    img = cv2.Canny(img, 295, 300)
     #__,img = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
 
     # Resize image back to original

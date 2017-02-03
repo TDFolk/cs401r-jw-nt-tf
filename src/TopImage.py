@@ -6,7 +6,7 @@ import cv2
 def CropTopImage(src):
 
     # prepare image
-    original = cv2.imread(src,0)
+    original = cv2.imread(src, 0)
     imgout = imgp.prep(original)
 
     #crop
@@ -15,7 +15,7 @@ def CropTopImage(src):
     # save
     cv2.imwrite("result.jpg", imgout)
 
-# TODO: validate command line arguements
+
 img = sys.argv[1]
 
 # Crop
